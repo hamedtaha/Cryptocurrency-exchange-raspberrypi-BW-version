@@ -59,7 +59,7 @@ def main():
 def display_Charts():
     epd = epd2in7.EPD()
     epd.init()
-    epd.set_rotate(3) # Rotate the Display by 270 degree 
+    epd.rotate(3) # Rotate the Display by 270 degree 
     from coinmarketcap import Market
     coinmarketcap = Market()
     CurrencyData=coinmarketcap.ticker(start=0, limit=5, convert='EUR')
@@ -77,19 +77,19 @@ def display_Charts():
     font_num = ImageFont.truetype('fonts/PixelSplitter-Bold.ttf', 14)
     font_date = ImageFont.truetype('fonts/PixelSplitter-Bold.ttf',12)
 
-    epd.rectangle((0, 0, 264, 28), fill = 0);
-    epd.rectangle((0, 160, 264, 176), fill = 0);
-    epd.rectangle((0, 28, 264, 50), fill = 0);
-    epd.text((2, 8)," Cryptocurrency Market ",  font = font_titles,  fill = 255)
-    epd.v((5, 32), "NAME          PRICE                           CHANGE(24h)",font =font_table_title,  fill = 255)
+    draw.rectangle((0, 0, 264, 28), fill = 0);
+    draw.rectangle((0, 160, 264, 176), fill = 0);
+    draw.rectangle((0, 28, 264, 50), fill = 0);
+    draw.text((2, 8)," Cryptocurrency Market ",  font = font_titles,  fill = 255)
+    draw.text((5, 32), "NAME          PRICE                           CHANGE(24h)",font =font_table_title,  fill = 255)
     for item in CurrencyData:
         #price=round(float(),4)
-        epd.text((5,40+LINEHEIGHT),item['symbol'],font =font_titles,fill = 0)
-        epd.text((60,40+LINEHEIGHT),"€"+item['price_eur'],font =font_num,fill = 0)
-        epd.text((200,40+LINEHEIGHT),item['percent_change_24h']+"%",font =font_num,fill = 0)
+        draw.text((5,40+LINEHEIGHT),item['symbol'],font =font_titles,fill = 0)
+        draw.text((60,40+LINEHEIGHT),"€"+item['price_eur'],font =font_num,fill = 0)
+        draw.text((200,40+LINEHEIGHT),item['percent_change_24h']+"%",font =font_num,fill = 0)
         LINEHEIGHT+=20
     
-    epd.text((0,160),str(" UPDATED ON:"+time.strftime("%c")),font =font_date,fill = 255)
+    draw.text((0,160),str(" UPDATED ON:"+time.strftime("%c")),font =font_date,fill = 255)
 
     epd.display_frame(epd.get_frame_buffer(image))
 

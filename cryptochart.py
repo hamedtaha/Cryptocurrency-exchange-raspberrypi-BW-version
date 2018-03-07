@@ -59,7 +59,7 @@ def main():
 def display_Charts():
     epd = epd2in7.EPD()
     epd.init()
-    epd.rotate(3) # Rotate the Display by 270 degree 
+    #epd.rotate(3) # Rotate the Display by 270 degree 
     from coinmarketcap import Market
     coinmarketcap = Market()
     CurrencyData=coinmarketcap.ticker(start=0, limit=5, convert='EUR')
